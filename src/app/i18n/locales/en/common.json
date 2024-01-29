@@ -1,0 +1,45 @@
+{
+    "bans": "Bans",
+    "mutes": "Mutes",
+    "warnings": "Warnings",
+    "kicks": "Kicks",
+    "change_lang": "Change Language",
+    "change_lang_desc": "Change to your preferred language",
+    "search": "Search for a player",
+    "type_search": "Type to search",
+    "nav_menu": "Navigation Menu",
+    "locales": {
+        "en": "English",
+        "vi": "Vietnamese",
+        "original": {
+            "en": "English",
+            "vi": "Tiếng Việt"
+        }
+    },
+    "pages": {
+        "index": {
+            "welcome": "Welcome to LiteBans' Ban List",
+            "description": "Here is where all of our punishments are listed."
+        },
+        "player": "Player",
+        "operator": "Operator",
+        "reason": "Reason",
+        "removed_reason": "Removed Reason",
+        "date": "Date",
+        "expire": "Expire",
+        "permanent": "Permanent",
+        "page": "Page",
+        "of": "of",
+        "ban": {
+            "title": "Listing for banned players",
+            "description": "Players who were banned for using 3rd software, abusing bugs, etc...",
+            "ban": "Ban #{{id}}",
+            "date": "Date: {{date}}",
+            "status": "Status",
+            "active": "Active",
+            "inactive": "Inactive",
+            "IP Ban": "IP Ban",
+            "server": "Server"
+        }
+    }
+}

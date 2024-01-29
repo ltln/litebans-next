@@ -1,0 +1,45 @@
+{
+    "bans": "Khóa tài khoản",
+    "mutes": "Cấm chat",
+    "warnings": "Cảnh cáo",
+    "kicks": "Đuổi",
+    "change_lang": "Thay đổi ngôn ngữ",
+    "change_lang_desc": "Thay đổi ngôn ngữ thích hợp của bạn.",
+    "search": "Tìm kiếm người chơi",
+    "type_search": "Nhập để tìm kiếm",
+    "nav_menu": "Menu Điều Hướng",
+    "locales": {
+        "en": "Tiếng Anh",
+        "vi": "Tiếng Việt",
+        "original": {
+            "en": "English",
+            "vi": "Tiếng Việt"
+        }
+    },
+    "pages": {
+        "index": {
+            "welcome": "Chào mừng đến với danh sách vi phạm của {{server}}.",
+            "description": "Đây là nơi liệt kê các vi phạm của người chơi."
+        },
+        "player": "Người chơi",
+        "operator": "Quản trị",
+        "reason": "Lý do",
+        "removed_reason": "Lý do xoá",
+        "date": "Ngày",
+        "expire": "Hết hạn",
+        "permanent": "Vĩnh viễn",
+        "page": "Trang",
+        "of": "trên",
+        "ban": {
+            "title": "Danh sách người chơi bị khoá tài khoản",
+            "description": "Người chơi bị khoá tài khoản vì sử dụng phầm mềm thứ ba, lợi dụng lỗi, v.v...",
+            "ban": "Ban #{{id}}",
+            "date": "Date: {{date}}",
+            "status": "Status",
+            "active": "Active",
+            "inactive": "Inactive",
+            "IP Ban": "IP Ban",
+            "server": "Server"
+        }
+    }
+}
