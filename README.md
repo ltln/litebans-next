@@ -1,11 +1,11 @@
 # LiteBans-next
 Web interface for [LiteBans](https://www.spigotmc.org/resources/litebans.3715) using Next.js
 ### Features
-[ ] All features from [litebans-php](https://gitlab.com/ruany/litebans-php)
-[x] [TailwindCSS](https://tailwindcss.com/) + [shadcn-ui](https://ui.shadcn.com)
-[ ] Light & dark mode
-[ ] Localization
-[x] Language switcher
+- [ ] All features from [litebans-php](https://gitlab.com/ruany/litebans-php) 
+- [x] [TailwindCSS](https://tailwindcss.com/) + [shadcn-ui](https://ui.shadcn.com)
+- [x] Light & dark mode
+- [x] Localization
+- [x] Language switcher
 ### Getting Started
 1. Clone this repository
 ```bash
