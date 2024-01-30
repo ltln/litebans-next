@@ -24,11 +24,13 @@ export async function list(page: number, limit: number) {
 
 export async function info(id: number) {
     const _data = await sql({
-        q: 'SELECT data.id, data.uuid, data.reason, data.banned_by_name, data.removed_by_name, data.removed_by_reason, data.time, data.until, data.server_origin, data.ipban, data.active, user.name FROM '+ process.env.TABLE_PREFIX +'bans AS data LEFT JOIN '+ process.env.TABLE_PREFIX +'history AS user ON data.uuid = user.uuid WHERE data.id = ?', 
+        q: 'SELECT data.id, data.uuid, data.reason, data.banned_by_name, data.removed_by_name, data.removed_by_reason, data.time, data.until, data.server_origin, data.ipban, data.active, user.name FROM '+ config.database.table_prefix +'bans AS data LEFT JOIN '+ config.database.table_prefix +'history AS user ON data.uuid = user.uuid WHERE data.id = ?', 
         v: [id]
     })
 
     if (!_data[0]) return null;
+    _data[0].ipban = Buffer.from(_data[0].ipban, 'utf8').readInt8() ? true : false;
+    _data[0].active = Buffer.from(_data[0].active, 'utf8').readInt8() ? true : false;
     _data[0].until == -1 ? _data[0].until = 0 : undefined
-    return { data: _data[0] }
+    return _data[0];
 }
