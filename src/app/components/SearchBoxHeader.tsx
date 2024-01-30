@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import useMediaQuery from "@/lib/useMediaQuery";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
@@ -11,6 +11,18 @@ export default function SearchBox({ children }: { children: ReactElement }) {
     const { t } = useTranslation('common');
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
+
+    useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+          if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault()
+            setOpen((open) => !open)
+          }
+        }
+     
+        document.addEventListener("keydown", down)
+        return () => document.removeEventListener("keydown", down)
+    }, [])
 
     if (isDesktop) {
         return (
