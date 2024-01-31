@@ -6,5 +6,9 @@ export const config = {
         password: "",
         database: "",
         table_prefix: "litebans_"
+    },
+    console: {
+        name: ["Console", "Server"],
+        image: "/console.png"
     }
 }

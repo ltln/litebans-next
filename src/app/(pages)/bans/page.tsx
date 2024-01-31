@@ -1,79 +1,66 @@
+"use client";
+
 import { Input } from "@/app/components/ui/input";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
-import { createTranslation } from "@/app/i18n/server";
+import { minecraft } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslation } from "@/app/i18n/client";
+import DataTable, { CDate, CExpire, COperator, CPlayer, CReason, TPunishColumn } from "@/app/components/Table";
+import LoadingRipple from "@/app/components/LoadingRipple";
+import { FormEvent, useEffect, useState } from "react";
+import { Button } from "@/app/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const example_data = [
-    {
-        name: "Lookis",
-        operator: "Console",
-        reason: "Test",
-        date: 1706522476,
-        expire: 1706522480
-    },
-    {
-        name: "Lookis",
-        operator: "Console",
-        reason: "Test",
-        date: 1706522476,
-        expire: false
-    },
-    {
-        name: "Lookis",
-        operator: "Console",
-        reason: "Test",
-        date: 1706522476,
-        expire: false
-    },
-]
+export default function Bans() {
+    const { t } = useTranslation('common');
+    const { push } = useRouter();
+    const { get } = useSearchParams();
+    const page = get("p");
 
-export default async function Bans() {
-    const { t } = await createTranslation('common');
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['?p=' + page],
+        queryFn: () => axios.get(`/api/bans?page=${page}`),
+    });
+    const columns: TPunishColumn[] = [CPlayer, COperator, CReason, CDate, CExpire];
+
+    const [cPage, setCPage] = useState<number>(page ? parseInt(page) : 1);
+    const handlePageChange = (e: FormEvent) => {
+        e.preventDefault();
+        push(`?p=${cPage}`);
+    }
+
+    useEffect(() => {
+        setCPage(page ? parseInt(page) : 1);
+    }, [page])
+
     return (
         <>
             <p className="text-3xl max-md:text-xl py-4 text-center font-bold">{t('pages.ban.title')}</p>
             <p className="text-center dark:text-gray-400">{t('pages.ban.description')}</p>
-            <div className="w-full mt-4">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="text-center">{t('pages.player')}</TableHead>
-                            <TableHead className="text-center">{t('pages.operator')}</TableHead>
-                            <TableHead className="text-center">{t('pages.reason')}</TableHead>
-                            <TableHead className="text-center">{t('pages.date')}</TableHead>
-                            <TableHead className="text-center">{t('pages.expire')}</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                    {
-                    example_data.map((n, i) => {
-                    return (
-                        <TableRow key={i}>
-                            <TableCell>
-                                <div className="flex gap-2 items-center">
-                                    <Image alt="player" src={`https://minotar.net/avatar/${n.name}/100`} height={25} width={25} className="rounded-sm" />
-                                    <span>{n.name}</span>
-                                </div>
-                            </TableCell>
-                            <TableCell>
-                                <div className="flex gap-2 items-center">
-                                    <Image alt="operator" src={`https://minotar.net/avatar/${n.operator}/100`} height={25} width={25} className="rounded-sm" />
-                                    <span>{n.operator}</span>
-                                </div>
-                            </TableCell>
-                            <TableCell>{n.reason}</TableCell>
-                            <TableCell className="text-center">{n.date}</TableCell>
-                            <TableCell className="text-center">{n.expire != false ? n.expire : t('pages.permanent')}</TableCell>
-                        </TableRow>
-                    )
-                    })
-                    }
-                    </TableBody>
-                </Table>
+            <div className="w-full my-4">
+                { isLoading ? <LoadingRipple /> : <DataTable type="bans" columns={columns} data={data?.data.data} />}
                 <div className="flex gap-2 items-center justify-center mt-4">
-                    <span>{t('pages.page')} </span>
-                    <Input type="number" className="w-20" min={1} />
-                    <span>{t('pages.of')} 1</span>
+                    <Button variant="outline" className={"mr-4"} disabled={data ? cPage <= 1 ? true : false : true} onClick={() => cPage > 1 ? push(`?p=${cPage - 1}`) : undefined}>
+                        <ChevronLeft />
+                    </Button>
+                    <span className="max-sm:hidden">{t('pages.page')} </span>
+                    <form onSubmit={handlePageChange}>
+                        <Input 
+                            type="number" 
+                            className="w-16 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                            min={1}
+                            value={cPage}
+                            onChange={e => setCPage(parseInt(e.target.value))} 
+                        />
+                    </form>
+                    <span>{t('pages.of')} {data ? data.data.total_page : "0"}</span>
+                    <Button variant="outline" className="ml-4" disabled={data ? cPage  >= data.data.total_page ? true : false : true} onClick={() => data ? cPage < data.data.total_page ? push(`?p=${cPage + 1}`) : null : null}>
+                        <ChevronRight />
+                    </Button>
                 </div>
             </div>
         </>

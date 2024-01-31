@@ -9,9 +9,11 @@ export async function list(page: number, limit: number) {
     const _tC = page >= 1 && page <= _tP ? page : 1;
 
     const _ex = await sql({
-        q: 'SELECT data.id, data.uuid, data.reason, data.banned_by_name as operator, data.time, user.name as player FROM '+ config.database.table_prefix +'bans AS data LEFT JOIN '+ config.database.table_prefix +'history AS user ON data.uuid = user.uuid ORDER BY data.id DESC LIMIT ?,?', 
+        q: 'SELECT data.id, user.name as player, data.banned_by_name as operator, data.reason, data.time, data.until, data.uuid FROM '+ config.database.table_prefix +'bans AS data LEFT JOIN '+ config.database.table_prefix +'history AS user ON data.uuid = user.uuid ORDER BY data.id DESC LIMIT ?,?', 
         v: [(_tC - 1) * limit, limit]
     })
+
+    _ex.forEach((ob) => delete ob.uuid);
 
     return {
         total: count,
@@ -32,5 +34,6 @@ export async function info(id: number) {
     _data[0].ipban = Buffer.from(_data[0].ipban, 'utf8').readInt8() ? true : false;
     _data[0].active = Buffer.from(_data[0].active, 'utf8').readInt8() ? true : false;
     _data[0].until == -1 ? _data[0].until = 0 : undefined
+    delete _data[0].uuid;
     return _data[0];
 }
