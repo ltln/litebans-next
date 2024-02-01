@@ -24,12 +24,13 @@ export type TPunishData = {
 
 export default function DataTable({ data } : { data: TPunishData }) {
     const { t } = useTranslation('common');
+    if (!data) return null;
     return (
-        <div className="grid grid-cols-3 max-md:grid-cols-1 mt-8">
+        <div className="grid grid-cols-3 max-md:grid-cols-1">
             <div className="col-span-1 flex items-center justify-center">
                 <div className="text-center">
-                    <Image alt="player_body" src={`https://minotar.net/body/${data.player}/120`} height={120} width={120} className="max-md:hidden rounded-sm m-auto" />
-                    <Image alt="player_body" src={`https://minotar.net/avatar/${data.player}/120`} height={120} width={120} className="md:hidden rounded-sm m-auto" />
+                    <Image alt="player_body" loading="eager" src={`https://minotar.net/body/${data.player}/120`} height={120} width={120} className="max-md:hidden rounded-sm m-auto" />
+                    <Image alt="player_body" loading="eager" src={`https://minotar.net/avatar/${data.player}/120`} height={120} width={120} className="md:hidden rounded-sm m-auto" />
                     <p className={cn(minecraft.className,"text-2xl mt-2 mb-2 text-slate-600 hover:text-slate-600/80 dark:text-gray-400 dark:hover:text-gray-400/80")}>{data.player}</p>
                 </div>
             </div>
@@ -49,7 +50,8 @@ export default function DataTable({ data } : { data: TPunishData }) {
                             <td className="w-32 text-right px-4 py-1 text-gray-700 dark:text-gray-400">{t('pages.operator')}</td>
                             <td className="flex items-center gap-2 py-1">
                                 <Image 
-                                    alt="operator" 
+                                    alt="operator"
+                                    loading="eager"
                                     src={config.console.name.includes(data.operator) ? config.console.image : `https://minotar.net/avatar/${data.operator}/25`} 
                                     height={25} 
                                     width={25} 
@@ -80,7 +82,8 @@ export default function DataTable({ data } : { data: TPunishData }) {
                                 <td className="w-32 text-right px-4 py-1 text-gray-700 dark:text-gray-400">{t('pages.removed')}</td>
                                 <td className="flex items-center gap-2 py-1 align-text-top">
                                     <Image 
-                                        alt="operator" 
+                                        alt="operator"
+                                        loading="eager"
                                         src={config.console.name.includes(data.removed_operator) ? config.console.image : `https://minotar.net/avatar/${data.removed_operator}/25`} 
                                         height={25} 
                                         width={25} 

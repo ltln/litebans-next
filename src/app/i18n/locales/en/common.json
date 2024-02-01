@@ -16,9 +16,14 @@
             "vi": "Tiếng Việt"
         }
     },
+    "error": {
+        "title": "An error occured!",
+        "fetch": "Something went wrong while fetching data. Please try again later!",
+        "not_found": "Cannot find the resources you requested."
+    },
     "pages": {
         "index": {
-            "welcome": "Welcome to LiteBans' Ban List",
+            "welcome": "Welcome to {{server}}'s Ban List",
             "description": "Here is where all of our punishments are listed."
         },
         "player": "Player",
@@ -43,6 +48,16 @@
             "description": "Players who were banned for using 3rd software, abusing bugs, etc...",
             "ban": "Ban #{{id}}",
             "ip_ban": "IP Ban"
+        },
+        "mute": {
+            "title": "Listing for muted players",
+            "description": "Players who were muted for inappropriate behaviour, being rude, etc...",
+            "mute": "Mute #{{id}}"
+        },
+        "kick": {
+            "title": "Listing for kicked players",
+            "description": "Players who were kicked for reasons such as timed out, anticheat kicks, etc...",
+            "kick": "Kick #{{id}}"
         }
     }
 }

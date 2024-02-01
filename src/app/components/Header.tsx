@@ -52,7 +52,7 @@ export default function Header() {
                         <Link href="/bans" className="transition-colors hover:text-foreground/80 text-foreground/60">
                             {t('bans')}
                         </Link>
-                        <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground/60">
+                        <Link href="/mutes" className="transition-colors hover:text-foreground/80 text-foreground/60">
                             {t('mutes')}
                         </Link>
                         <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground/60">

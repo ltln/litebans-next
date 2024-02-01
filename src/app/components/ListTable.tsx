@@ -35,6 +35,7 @@ type TListData = {
 export default function ListTable({ type, columns, data }: { type: Punishment, columns: TListColumn[], data: TListData[] }) {
     const { t } = useTranslation('common');
     const { push } = useRouter();
+    if (!data || data.length == 0) return null;
     return (
         <Table>
             <TableHeader>
@@ -53,14 +54,15 @@ export default function ListTable({ type, columns, data }: { type: Punishment, c
                         <TableRow key={i} className="cursor-pointer" onClick={() => push(`/${type}/${n.id}`)}>
                             <TableCell>
                                 <div className="flex gap-2 items-center">
-                                    <Image alt="player" src={`https://minotar.net/avatar/${n.player}/25`} height={25} width={25} className="rounded-sm" />
+                                    <Image alt="player" loading="eager" src={`https://minotar.net/avatar/${n.player}/25`} height={25} width={25} className="rounded-sm" />
                                     <span className={cn(minecraft.className, "text-lg text-gray-400 hover:text-gray-400/80")}>{n.player}</span>
                                 </div>
                             </TableCell>
                             <TableCell>
                                 <div className="flex gap-2 items-center">
                                     <Image 
-                                        alt="operator" 
+                                        alt="operator"
+                                        loading="eager"
                                         src={config.console.name.includes(n.operator) ? config.console.image : `https://minotar.net/avatar/${n.operator}/25`} 
                                         height={25} 
                                         width={25} 

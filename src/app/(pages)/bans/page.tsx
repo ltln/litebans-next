@@ -10,15 +10,16 @@ import LoadingRipple from "@/app/components/LoadingRipple";
 import { FormEvent, useEffect, useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import ErrorAlert from "@/app/components/ErrorAlert";
 
 export default function Bans() {
     const { t } = useTranslation('common');
     const { push } = useRouter();
     const { get } = useSearchParams();
-    const page = get("p");
+    const page = get("p") || "1";
 
     const { data, error, isLoading } = useQuery({
-        queryKey: ['?p=' + page],
+        queryKey: ['bans?p=' + page],
         queryFn: () => axios.get(`/api/bans?page=${page}`),
     });
     const columns: TListColumn[] = [CPlayer, COperator, CReason, CDate, CExpire];
@@ -40,7 +41,13 @@ export default function Bans() {
             <p className="text-3xl max-md:text-xl py-4 text-center font-bold">{t('pages.ban.title')}</p>
             <p className="text-center dark:text-gray-400">{t('pages.ban.description')}</p>
             <div className="w-full my-4">
-                { isLoading ? <LoadingRipple /> : <ListTable type="bans" columns={columns} data={data?.data.data} />}
+                { isLoading ? 
+                    <LoadingRipple /> 
+                : error == null ?
+                    <ListTable type="bans" columns={columns} data={data?.data.data} />
+                :
+                    <ErrorAlert title={t('error.title')} message={t('error.fetch')} error={error.message} />
+                }
                 <div className="flex gap-2 items-center justify-center mt-4">
                     <Button variant="outline" className={"mr-4"} disabled={data ? cPage <= 1 ? true : false : true} onClick={() => cPage > 1 ? push(`?p=${cPage - 1}`) : undefined}>
                         <ChevronLeft />

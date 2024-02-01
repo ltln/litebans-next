@@ -16,6 +16,11 @@
             "vi": "Tiếng Việt"
         }
     },
+    "error": {
+        "title": "Đã có lỗi xảy ra!",
+        "fetch": "Có lỗi xảy ra khi đang lấy dữ liệu. Hãy thử lại sau!",
+        "not_found": "Không thể tìm thấy tài nguyên bạn yêu cầu."
+    },
     "pages": {
         "index": {
             "welcome": "Chào mừng đến với danh sách vi phạm của {{server}}.",
@@ -43,6 +48,11 @@
             "description": "Người chơi bị khoá tài khoản vì sử dụng phầm mềm thứ ba, lợi dụng lỗi, v.v...",
             "ban": "Khoá tài khoản #{{id}}",
             "ip_ban": "Bị khoá IP"
+        },
+        "mute": {
+            "title": "Danh sách người chơi bị cấm chat",
+            "description": "Người chơi bị cấm chat vì hành vi không đúng chuẩn mực, bất lịch sự, v.v...",
+            "mute": "Cấm chat #{{id}}"
         }
     }
 }
