@@ -1,15 +1,11 @@
 "use client";
 
 import { Input } from "@/app/components/ui/input";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
-import { minecraft } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "@/app/i18n/client";
-import DataTable, { CDate, CExpire, COperator, CPlayer, CReason, TPunishColumn } from "@/app/components/Table";
+import ListTable, { CDate, CExpire, COperator, CPlayer, CReason, TListColumn } from "@/app/components/ListTable";
 import LoadingRipple from "@/app/components/LoadingRipple";
 import { FormEvent, useEffect, useState } from "react";
 import { Button } from "@/app/components/ui/button";
@@ -25,12 +21,14 @@ export default function Bans() {
         queryKey: ['?p=' + page],
         queryFn: () => axios.get(`/api/bans?page=${page}`),
     });
-    const columns: TPunishColumn[] = [CPlayer, COperator, CReason, CDate, CExpire];
+    const columns: TListColumn[] = [CPlayer, COperator, CReason, CDate, CExpire];
 
     const [cPage, setCPage] = useState<number>(page ? parseInt(page) : 1);
     const handlePageChange = (e: FormEvent) => {
         e.preventDefault();
-        push(`?p=${cPage}`);
+        let pushPage = data ? cPage > data.data.total_page ? data.data.total_page : cPage : 1;
+        setCPage(pushPage);
+        push(`?p=${pushPage}`);
     }
 
     useEffect(() => {
@@ -42,7 +40,7 @@ export default function Bans() {
             <p className="text-3xl max-md:text-xl py-4 text-center font-bold">{t('pages.ban.title')}</p>
             <p className="text-center dark:text-gray-400">{t('pages.ban.description')}</p>
             <div className="w-full my-4">
-                { isLoading ? <LoadingRipple /> : <DataTable type="bans" columns={columns} data={data?.data.data} />}
+                { isLoading ? <LoadingRipple /> : <ListTable type="bans" columns={columns} data={data?.data.data} />}
                 <div className="flex gap-2 items-center justify-center mt-4">
                     <Button variant="outline" className={"mr-4"} disabled={data ? cPage <= 1 ? true : false : true} onClick={() => cPage > 1 ? push(`?p=${cPage - 1}`) : undefined}>
                         <ChevronLeft />

@@ -24,22 +24,25 @@
         "player": "Player",
         "operator": "Operator",
         "reason": "Reason",
+        "removed": "Removed by",
         "removed_reason": "Removed Reason",
         "date": "Date",
+        "loading": "Loading",
         "expire": "Expire",
+        "expired": "Expired",
         "permanent": "Permanent",
         "page": "Page",
         "of": "of",
+        "date_spec": "Date: {{date}}",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "server": "Server",
         "ban": {
             "title": "Listing for banned players",
             "description": "Players who were banned for using 3rd software, abusing bugs, etc...",
             "ban": "Ban #{{id}}",
-            "date": "Date: {{date}}",
-            "status": "Status",
-            "active": "Active",
-            "inactive": "Inactive",
-            "IP Ban": "IP Ban",
-            "server": "Server"
+            "ip_ban": "IP Ban"
         }
     }
 }

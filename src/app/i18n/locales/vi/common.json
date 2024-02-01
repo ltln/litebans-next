@@ -24,22 +24,25 @@
         "player": "Người chơi",
         "operator": "Quản trị",
         "reason": "Lý do",
+        "removed": "Đã xoá bởi",
         "removed_reason": "Lý do xoá",
         "date": "Ngày",
+        "loading": "Đang tải",
         "expire": "Hết hạn",
+        "expired": "Đã hết hạn",
         "permanent": "Vĩnh viễn",
         "page": "Trang",
         "of": "trên",
+        "date_spec": "Ngày: {{date}}",
+        "status": "Trạng thái",
+        "active": "Còn hiệu lực",
+        "inactive": "Hết hiệu lực",
+        "server": "Máy chủ",
         "ban": {
             "title": "Danh sách người chơi bị khoá tài khoản",
             "description": "Người chơi bị khoá tài khoản vì sử dụng phầm mềm thứ ba, lợi dụng lỗi, v.v...",
-            "ban": "Ban #{{id}}",
-            "date": "Date: {{date}}",
-            "status": "Status",
-            "active": "Active",
-            "inactive": "Inactive",
-            "IP Ban": "IP Ban",
-            "server": "Server"
+            "ban": "Khoá tài khoản #{{id}}",
+            "ip_ban": "Bị khoá IP"
         }
     }
 }
